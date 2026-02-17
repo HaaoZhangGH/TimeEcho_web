@@ -1,0 +1,94 @@
+
+/* 大屏幕（大桌面显示器，大于等于 1200px） */
+
+html {
+    font-size: 2.5vh;
+}
+
+@media (max-width: 500px) { 
+    html {
+      font-size: 16px;
+    }
+}
+
+
+.body {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 5rem;
+}
+.thanks-logo {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 3rem;
+}
+.thanks-logo >text:first-of-type {
+    font-size: 1rem;
+    font-weight: 900;
+    color: #AEAFB2;
+    margin-top: 0.5rem;
+}
+.thanks-logo >text:last-of-type {
+    font-size: 0.4rem;
+    color: #AEAFB2;
+}
+.thanks-logo > img {
+    display: block;
+    width: 3.2rem;
+    height: 3.2rem;
+    margin: 0;
+}
+.section {
+    margin-top: 3rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 70%;
+}
+
+.tag-content {
+    max-width: 600px;
+    display: inline-flex;
+    flex-direction: row;
+    align-items: center;
+    flex-wrap: wrap;
+    margin-top: 0.8rem;
+    align-content: center;
+}
+
+.tag-content >span {
+    font-size: 0.7rem;
+    background-color: #F7F7F7;
+    border-radius: 0.2rem;
+    padding: 0.12rem 0.4rem;
+    margin-left: 0.2rem;
+    margin-bottom: 0.2rem;
+    color: #72767D;
+}
+.section >text:first-of-type {
+    color: #2C2E32;
+    font-weight: 600;
+    font-size: 1.2rem;
+}
+.items-content {
+    max-width: 600px;
+    display: inline-flex;
+    flex-direction: column;
+    align-items: center;
+    flex-wrap: wrap;
+    margin-top: 0.8rem;
+    align-content: center;
+}
+.items-content >span {
+    font-size: 0.75rem;
+    margin-bottom: 0.3rem;
+    color: #72767D;
+}
+.section >text:first-of-type {
+    color: #2C2E32;
+    font-weight: 600;
+    font-size: 1.2rem;
+}
