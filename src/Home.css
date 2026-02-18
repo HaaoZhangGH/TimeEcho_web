@@ -85,7 +85,11 @@ body {
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-  background-size: cover;
+  background: rgba(255, 255, 255, 0.72);
+  backdrop-filter: blur(9px) saturate(140%);
+  -webkit-backdrop-filter: blur(9px) saturate(140%);
+  padding: 0 clamp(14px, 4vw, 72px);
+  z-index: 10;
 
 }
 .Banner-Content {
@@ -94,26 +98,45 @@ body {
   align-items: center;
   flex-direction: column;
   padding-top: 16vh;
+  width: 100%;
+  max-width: 1320px;
+  padding-left: clamp(16px, 4vw, 56px);
+  padding-right: clamp(16px, 4vw, 56px);
+  box-sizing: border-box;
 }
 
 .Banner-Content-Title {
-  font-size: 7vh;
+  font-size: clamp(2.4rem, 6.6vw, 7vh);
   font-weight: bold;
+  line-height: 1.12;
+  text-align: center;
+  max-width: 100%;
+  text-wrap: balance;
+  overflow-wrap: anywhere;
+}
+.Banner-Content-Title > text {
+  display: inline;
 }
 .Banner-Content-Title >text:nth-child(2) {
   color: #1E60E5;
 }
 .Banner-Small-Title {
   font-size: 10vw;
+  line-height: 1.16;
 }
 
 .Banner-Content >text {
   font-size: 1.8vh;
   color: #2C2E32;
   margin-top: 1vh;
+  max-width: min(92vw, 980px);
+  line-height: 1.45;
+  text-wrap: pretty;
+  overflow-wrap: anywhere;
 }
 .Banner-Small-Content>text {
-  font-size: 3vw;
+  font-size: 3.4vw;
+  max-width: 90vw;
 }
 .Banner-App {
   width: 33vh;
@@ -136,28 +159,52 @@ body {
   font-size: 14px;
 }
 .Header > .logo > img {
-  margin-left: 5vw;
+  margin-left: 0;
   height: 4vh;
 }
-.download {
-  width: 10vh;
-  height: 3.5vh;
-  border-radius: 0.3vh;
-  background-color: #1E60E5;
+.language-switcher {
+  position: relative;
   display: flex;
   align-items: center;
-  justify-content: center;
-  color: white;
-  font-size: 1.6vh;
-  font-weight: 500;
-  margin-right: 5vw;
-  cursor: pointer;
-
 }
-.download:hover {
-  background-color: #05389f;
+.language-switcher::after {
+  content: '';
+  position: absolute;
+  right: 1.05vh;
+  top: 50%;
+  width: 0.52vh;
+  height: 0.52vh;
+  border-right: 0.14vh solid #5A6272;
+  border-bottom: 0.14vh solid #5A6272;
+  transform: translateY(-64%) rotate(45deg);
+  pointer-events: none;
 }
-
+.language-select {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  min-width: 15.6vh;
+  height: 3.45vh;
+  border: 1px solid #D6DDEB;
+  border-radius: 0.6vh;
+  padding: 0 2.35vh 0 1.05vh;
+  background-color: rgba(255, 255, 255, 0.86);
+  font-size: 1.45vh;
+  color: #2C2E32;
+  line-height: 1;
+  box-sizing: border-box;
+  box-shadow: none;
+}
+.language-select:focus {
+  outline: none;
+  border-color: #D6DDEB;
+  box-shadow: none;
+}
+.language-select:focus-visible {
+  outline: none;
+  border-color: #D6DDEB;
+  box-shadow: none;
+}
 .Banner {
  /* position: absolute; */
  height: 100vh;
@@ -332,8 +379,12 @@ body {
 .protocol {
   display: flex;
   flex-direction: row;
+  flex-wrap: wrap;
   align-items: center;
-  justify-content: space-between;
+  justify-content: center;
+  width: min(92vw, 820px);
+  column-gap: 5vw;
+  row-gap: 1.2vh;
   font-size: 1.8vh;
   color: #45474A;
   font-weight: 600;
@@ -347,10 +398,6 @@ body {
 .protocol >text:hover {
   color: black;
   cursor: pointer;
-}
-.protocol >text:nth-child(2) {
-  margin-left: 10vw;
-  margin-right: 10vw;
 }
 .footer-line {
   width: 100%;
@@ -395,4 +442,26 @@ body {
   font-size: 2.8vw;
 }
 
+@media (max-width: 550px) {
+  .Header {
+    height: 6vh;
+    padding: 0 4vw;
+  }
 
+  .Header > .logo > img {
+    margin-left: 0;
+  }
+
+  .language-select {
+    min-width: 29vw;
+    height: 3.8vh;
+    padding: 0 3.1vh 0 1.15vh;
+    font-size: 2.8vw;
+  }
+
+  .language-switcher::after {
+    right: 1vh;
+    width: 0.6vh;
+    height: 0.6vh;
+  }
+}

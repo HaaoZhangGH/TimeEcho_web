@@ -1,8 +1,21 @@
 import React, { Component } from 'react';
-import './Thanks.css'
+import { I18nContext } from './i18n';
+import './Thanks.css';
+
 export default class Thanks extends Component {
+    static contextType = I18nContext;
+
     componentDidMount() {
-        document.title = "感谢"
+        this.updateDocumentTitle();
+    }
+
+    componentDidUpdate() {
+        this.updateDocumentTitle();
+    }
+
+    updateDocumentTitle() {
+        const { t } = this.context;
+        document.title = t('meta.thanksTitle');
     }
 
 
@@ -26,36 +39,37 @@ export default class Thanks extends Component {
        </div>
     }
     render() {
+        const { t } = this.context;
         let makers = ["@Haaozhang", "@leven"];
-        let thanks = ["@一航", "@李文佳", "GG266", "@wenbin", "@李文佳", "GG266", "@wenbin","@wenbin", "@李文佳", "GG266"]
-        let library = ["MkRingProgressView (MIT 许可证)", "Yuecai.的同步代码库", "Lottie-ios ( Apache License 2.0 )","Purchases ( MIT 许可证)"];
-        let others = ["MkRingProgressView (MIT 许可证)", "Yuecai.的同步代码库", "Lottie-ios ( Apache License 2.0 )","Purchases ( MIT 许可证)"];
+        let thanks = ["@一航", "@李文佳", "GG266", "@wenbin", "@李文佳", "GG266", "@wenbin","@wenbin", "@李文佳", "GG266"];
+        let library = t('thanks.items.library');
+        let others = t('thanks.items.others');
 
         return (
             <div className='body'>
                 <div className='thanks-logo'>
                     <img src="https://lc-gluttony.s3.amazonaws.com/ZzwZfP9iPTCF/VNrFeB74j1CLQhvuRXYbscWWoSn0gKHG/thanks_logo.png"></img>
-                    <text>时间印迹</text>
+                    <text>TimeEcho</text>
                     <text>V1.01(1)</text>
                 </div>
 
                 <div className='section'>
-                    <text>制作者</text>
+                    <text>{t('thanks.sections.makers')}</text>
                     {this.getTags(makers)}
                 </div>
 
                 <div className='section'>
-                    <text>感谢</text>
+                    <text>{t('thanks.sections.acknowledgements')}</text>
                     {this.getTags(thanks)}
                 </div>
 
                 <div className='section'>
-                    <text>代码库</text>
+                    <text>{t('thanks.sections.libraries')}</text>
                     {this.getCloumItems(library)}
                 </div>
 
                 <div className='section'>
-                    <text>其他</text>
+                    <text>{t('thanks.sections.others')}</text>
                     {this.getCloumItems(others)}
                 </div>
             

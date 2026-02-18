@@ -1,26 +1,42 @@
 import './Home.css';
 import React, { Component } from 'react';
+import { I18nContext } from './i18n';
 
 export default class Home extends Component {
+  static contextType = I18nContext;
+
   constructor(props) {
     super(props);
-    this.updateWindowDimensions = this.updateWindowDimensions.bind(this)
+    this.updateWindowDimensions = this.updateWindowDimensions.bind(this);
+    this.handleLanguageChange = this.handleLanguageChange.bind(this);
     this.state = { isSmall: false };
   }
 
   componentDidMount() {
     this.updateWindowDimensions();
-    document.title = "时间印迹"
+    this.updateDocumentTitle();
     window.addEventListener('resize', this.updateWindowDimensions);
+  }
+
+  componentDidUpdate() {
+    this.updateDocumentTitle();
   }
 
   componentWillUnmount() {
     window.removeEventListener('resize', this.updateWindowDimensions);
   }
 
+  updateDocumentTitle() {
+    const { t } = this.context;
+    document.title = t('meta.homeTitle');
+  }
+
   updateWindowDimensions() {
-    console.log(window.innerWidth)
     this.setState({ isSmall: window.innerWidth <= 550 });
+  }
+
+  handleLanguageChange(event) {
+    this.context.setLang(event.target.value);
   }
 
   downloadApp() {
@@ -28,75 +44,76 @@ export default class Home extends Component {
   }
 
   clickProtocol(type) {
-    if (type == 1 ) {
-      window.open("https://lovetime.feishu.cn/docx/J47pdtc1GoeXizxkhptc4vfkneL")
-      // https://lovetime.feishu.cn/docx/BlHNd5QdCogY8KxbEV4cNlLEnYb
-      // window.location.href = "https://lovetime.feishu.cn/docx/J47pdtc1GoeXizxkhptc4vfkneL";
-    } else if (type == 2) {
-      window.open("https://lovetime.feishu.cn/docx/BlHNd5QdCogY8KxbEV4cNlLEnYb")
-    } else if (type == 3) {
-      window.open("mailto:solovetime@163.com")
+    const { links } = this.context;
+
+    if (type === 'userAgreement') {
+      window.location.hash = '/user-agreement';
+    } else if (type === 'privacyPolicy') {
+      window.location.hash = '/privacy-policy';
+    } else if (type === 'contact') {
+      window.open(links.contact);
     }
   }
 
   render() {
-    let isSmall = this.state.isSmall;
+    const { t, lang, languages } = this.context;
+    const isSmall = this.state.isSmall;
 
     let valueItems;
-    if (this.state.isSmall) {
+    if (isSmall) {
       valueItems = <div className='value-container'>
-        <text className={("sh1")}>追踪时间能有什么用？</text>
+        <text className={("sh1")}>{t('home.value.title')}</text>
         <div className='value-items small-values'>
           <div className='value-item'>
             <img src="https://lc-gluttony.s3.amazonaws.com/ZzwZfP9iPTCF/dhVld6WdL4TMMvCRJsrILeL4rKQqwJFW/value1.png"></img>
-            <text className={("sh2")}>提升专注力</text>
-            <text className='sh3'>尤其是将时间分为不同的各个模块</text>
+            <text className={("sh2")}>{t('home.value.focus.title')}</text>
+            <text className='sh3'>{t('home.value.focus.desc')}</text>
           </div>
           <div className='value-item'>
             <img src="https://lc-gluttony.s3.amazonaws.com/ZzwZfP9iPTCF/0JK2D9beVGTHIhqQFIum1RDzqRhfGUsy/value2.png"></img>
-            <text className='sh2'>工作生活分开</text>
-            <text className='sh3'>给自己一个目标，工作多少小时就停止。找到工作与生活的平衡</text>
+            <text className='sh2'>{t('home.value.balance.title')}</text>
+            <text className='sh3'>{t('home.value.balance.desc')}</text>
           </div>
         </div>
         <div className='value-items small-values'>
           <div className='value-item'>
             <img src="https://lc-gluttony.s3.amazonaws.com/ZzwZfP9iPTCF/1lz5nFiWXoGTy8AttmgMPblcivUd7IxR/value3.png"></img>
-            <text className='sh2'>持续做某事</text>
-            <text className='sh3'>统计在某件事上花时间，就更容易坚持</text>
+            <text className='sh2'>{t('home.value.consistency.title')}</text>
+            <text className='sh3'>{t('home.value.consistency.desc')}</text>
           </div>
 
           <div className={['value-item']}>
             <img src="https://lc-gluttony.s3.amazonaws.com/ZzwZfP9iPTCF/M0pDHiXaTeDqiw9QdQgn39MqL38LRTHY/value4.png"></img>
-            <text className='sh2'>认识自我</text>
-            <text className='sh3'>知道自己的时间花在了哪里，从而更加了解自己</text>
+            <text className='sh2'>{t('home.value.self.title')}</text>
+            <text className='sh3'>{t('home.value.self.desc')}</text>
           </div>
         </div>
         <div className='value-line'></div>
       </div>
     } else {
       valueItems = <div className='value-container'>
-        <text className="h1">追踪时间能有什么用？</text>
+        <text className="h1">{t('home.value.title')}</text>
         <div className='value-items'>
           <div className='value-item'>
           <img src="https://lc-gluttony.s3.amazonaws.com/ZzwZfP9iPTCF/dhVld6WdL4TMMvCRJsrILeL4rKQqwJFW/value1.png"></img>
-            <text className="h2">提升专注力</text>
-            <text className="h3">尤其是将时间分为不同的各个模块</text>
+            <text className="h2">{t('home.value.focus.title')}</text>
+            <text className="h3">{t('home.value.focus.desc')}</text>
           </div>
           <div className='value-item'>
           <img src="https://lc-gluttony.s3.amazonaws.com/ZzwZfP9iPTCF/0JK2D9beVGTHIhqQFIum1RDzqRhfGUsy/value2.png"></img>
-            <text className='h2'>工作生活分开</text>
-            <text className='h3'>给自己一个目标，工作多少小时就停止。找到工作与生活的平衡</text>
+            <text className='h2'>{t('home.value.balance.title')}</text>
+            <text className='h3'>{t('home.value.balance.desc')}</text>
           </div>
           <div className='value-item'>
           <img src="https://lc-gluttony.s3.amazonaws.com/ZzwZfP9iPTCF/1lz5nFiWXoGTy8AttmgMPblcivUd7IxR/value3.png"></img>
-            <text className='h2'>持续做某事</text>
-            <text className='h3'>统计在某件事上花时间，就更容易坚持</text>
+            <text className='h2'>{t('home.value.consistency.title')}</text>
+            <text className='h3'>{t('home.value.consistency.desc')}</text>
           </div>
 
           <div className={['value-item']}>
           <img src="https://lc-gluttony.s3.amazonaws.com/ZzwZfP9iPTCF/M0pDHiXaTeDqiw9QdQgn39MqL38LRTHY/value4.png"></img>
-            <text className='h2'>认识自我</text>
-            <text className='h3'>知道自己的时间花在了哪里，从而更加了解自己</text>
+            <text className='h2'>{t('home.value.self.title')}</text>
+            <text className='h3'>{t('home.value.self.desc')}</text>
           </div>
         </div>
         <div className='value-line'></div>
@@ -107,23 +124,33 @@ export default class Home extends Component {
         <div className="Header">
           <div className='logo'>
             <img src="https://lc-gluttony.s3.amazonaws.com/ZzwZfP9iPTCF/dI7LoXp1dbQbVYs18ddCE3AxbrSLvR7H/header_logo.png"></img>
-            <text>时间印迹</text>
+            <text>TimeEcho</text>
           </div>
-
-          <div className='download' onClick={() => this.downloadApp()}>
-            <text>下载App</text>
+          <div className='language-switcher'>
+            <select
+              className='language-select'
+              value={lang}
+              onChange={this.handleLanguageChange}
+              aria-label={t('header.language')}
+            >
+              {languages.map((language) => (
+                <option key={language.code} value={language.code}>
+                  {language.label}
+                </option>
+              ))}
+            </select>
           </div>
         </div>
         <div className='Banner'>
 
           <div className={'Banner-Content ' + (isSmall ? "Banner-Small-Content" : "")}>
             <div className={"Banner-Content-Title " + (isSmall ? "Banner-Small-Title" : "")}>
-              <text>记录</text>
-              <text>专注</text>
-              <text>，预见未来</text>
+              <text>{t('home.banner.titleLine1')}</text>
+              <text>{t('home.banner.titleLine2')}</text>
+              <text>{t('home.banner.titleLine3')}</text>
             </div>
             <text>
-              记录专注、习惯专注、享受专注，成为理想的自己更近一步
+              {t('home.banner.subtitle')}
             </text>
           </div>
           <div className={'Banner-App ' + (isSmall ? "small-app" : "")}></div>
@@ -135,33 +162,36 @@ export default class Home extends Component {
         {valueItems}
 
         <div className={'record-container '  + (isSmall ? "small-container" : "")}>
-          <text className={(isSmall ? "sh1" : "h1")}>快速丰富的记录</text>
-          <text className={(isSmall ? "sh3" : "h3")}>尤其是将时间分为不同的各个模块，在完成之后再做别的事，将大大提升我们的专注力</text>
+          <text className={(isSmall ? "sh1" : "h1")}>{t('home.record.title')}</text>
+          <text className={(isSmall ? "sh3" : "h3")}>{t('home.record.desc')}</text>
           <img src="https://lc-gluttony.s3.amazonaws.com/ZzwZfP9iPTCF/NqJAV8aDmwn92jVltYw5ncmXhUE0GXBg/record.png"></img>
         </div>
 
         <div className={'data-container ' + (isSmall ? "small-container" : "")}>
-          <text  className={(isSmall ? "sh1" : "h1")}>掌控回顾时间</text>
-          <text className={(isSmall ? "sh3" : "h3")}> 尤其是将时间分为不同的各个模块，在完成之后再做别的事，将大大提升我们的专注力</text>
+          <text  className={(isSmall ? "sh1" : "h1")}>{t('home.data.title')}</text>
+          <text className={(isSmall ? "sh3" : "h3")}>{t('home.data.desc')}</text>
           <img src="https://lc-gluttony.s3.amazonaws.com/ZzwZfP9iPTCF/Dk9aHyvOW9X6DifbVz83eWIr6yGLJHG0/data.png"></img>
         </div>
         <div className='footer'>
           <img src="https://lc-gluttony.s3.amazonaws.com/ZzwZfP9iPTCF/pl0RnvJKpLKo8VLe8iLYOn1utVkJ2mfa/appStore.png" onClick={() => this.downloadApp()}></img>
           
           <div className='protocol'>
-            <text onClick={() => this.clickProtocol(1)}>
-              用户协议
+            <text onClick={() => this.clickProtocol('userAgreement')}>
+              {t('home.footer.userAgreement')}
             </text>
-            <text onClick={() => this.clickProtocol(2)}>
-              隐私政策
+            <text onClick={() => this.clickProtocol('privacyPolicy')}>
+              {t('home.footer.privacyPolicy')}
             </text>
-            <text onClick={() => this.clickProtocol(3)}>
-            联系我们
-           </text>
+            <text onClick={() => this.clickProtocol('contact')}>
+              {t('home.footer.contactUs')}
+            </text>
+            <text onClick={() => this.downloadApp()}>
+              {t('home.footer.downloadApp')}
+            </text>
           </div>
           <img src="https://lc-gluttony.s3.amazonaws.com/ZzwZfP9iPTCF/dI7LoXp1dbQbVYs18ddCE3AxbrSLvR7H/header_logo.png"></img>
           <text>
-            记录专注，预见未来
+            {t('home.footer.slogan')}
           </text>
 
           
