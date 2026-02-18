@@ -16,7 +16,7 @@ const SUPPORTED_CODES = LANGUAGE_OPTIONS.map((language) => language.code);
 const translations = {
   en: {
     meta: {
-      homeTitle: 'TimeEcho',
+      homeTitle: 'TimeECho',
       thanksTitle: 'Thanks',
     },
     header: {
@@ -92,7 +92,7 @@ const translations = {
   },
   'zh-Hans': {
     meta: {
-      homeTitle: 'TimeEcho',
+      homeTitle: 'TimeECho',
       thanksTitle: '感谢',
     },
     header: {
@@ -167,7 +167,7 @@ const translations = {
   },
   'zh-Hant': {
     meta: {
-      homeTitle: 'TimeEcho',
+      homeTitle: 'TimeECho',
       thanksTitle: '感謝',
     },
     header: {
@@ -242,7 +242,7 @@ const translations = {
   },
   ja: {
     meta: {
-      homeTitle: 'TimeEcho',
+      homeTitle: 'TimeECho',
       thanksTitle: '謝辞',
     },
     header: {
@@ -318,7 +318,7 @@ const translations = {
   },
   ko: {
     meta: {
-      homeTitle: 'TimeEcho',
+      homeTitle: 'TimeECho',
       thanksTitle: '감사',
     },
     header: {
@@ -394,7 +394,7 @@ const translations = {
   },
   fr: {
     meta: {
-      homeTitle: 'TimeEcho',
+      homeTitle: 'TimeECho',
       thanksTitle: 'Remerciements',
     },
     header: {

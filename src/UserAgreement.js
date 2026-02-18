@@ -10,7 +10,7 @@ export default function UserAgreement() {
   const content = userAgreementContent[lang] || userAgreementContent.en;
 
   useEffect(() => {
-    document.title = `${content.title} - TimeEcho`;
+    document.title = `${content.title} - TimeECho`;
   }, [content.title]);
 
   return (

@@ -124,7 +124,7 @@ export default class Home extends Component {
         <div className="Header">
           <div className='logo'>
             <img src="https://lc-gluttony.s3.amazonaws.com/ZzwZfP9iPTCF/dI7LoXp1dbQbVYs18ddCE3AxbrSLvR7H/header_logo.png"></img>
-            <text>TimeEcho</text>
+            <text>TimeECho</text>
           </div>
           <div className='language-switcher'>
             <select

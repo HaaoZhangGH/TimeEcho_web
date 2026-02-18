@@ -49,7 +49,7 @@ export default class Thanks extends Component {
             <div className='body'>
                 <div className='thanks-logo'>
                     <img src="https://lc-gluttony.s3.amazonaws.com/ZzwZfP9iPTCF/VNrFeB74j1CLQhvuRXYbscWWoSn0gKHG/thanks_logo.png"></img>
-                    <text>TimeEcho</text>
+                    <text>TimeECho</text>
                     <text>V1.01(1)</text>
                 </div>
 

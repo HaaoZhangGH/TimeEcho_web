@@ -10,7 +10,7 @@ export default function PrivacyPolicy() {
   const content = privacyPolicyContent[lang] || privacyPolicyContent.en;
 
   useEffect(() => {
-    document.title = `${content.title} - TimeEcho`;
+    document.title = `${content.title} - TimeECho`;
   }, [content.title]);
 
   return (
