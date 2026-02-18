@@ -1,0 +1,62 @@
+name: Publish Pages (main/root)
+
+on:
+  push:
+    branches:
+      - main
+    paths-ignore:
+      - index.html
+      - asset-manifest.json
+      - manifest.json
+      - robots.txt
+      - logo.png
+      - CNAME
+      - static/**
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  publish-root:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build site
+        run: npm run build
+
+      - name: Sync build artifacts to repository root
+        run: |
+          rm -rf static
+          cp -R build/static ./static
+          cp build/index.html ./index.html
+          cp build/asset-manifest.json ./asset-manifest.json
+          cp build/manifest.json ./manifest.json
+          cp build/robots.txt ./robots.txt
+          cp build/logo.png ./logo.png
+          cp build/CNAME ./CNAME
+
+      - name: Commit and push published files
+        run: |
+          if git diff --quiet -- index.html asset-manifest.json manifest.json robots.txt logo.png CNAME static; then
+            echo "No publish changes"
+            exit 0
+          fi
+
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add index.html asset-manifest.json manifest.json robots.txt logo.png CNAME static
+          git commit -m "chore(pages): sync root publish assets [skip ci]"
+          git push origin main
