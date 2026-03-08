@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
+import AgentationToolbar from './agentation-toolbar';
 import Home from './Home';
 import Thanks from './Thanks';
 import UserAgreement from './UserAgreement';
@@ -13,15 +14,18 @@ import { HashRouter, Route, Routes } from "react-router-dom";
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <I18nProvider>
-    <HashRouter>
-      {/* <Thanks/> */}
-      <Routes>
-        <Route exact path="/" element={<Home></Home>} />
-        <Route exact path="/thanks" element={<Thanks></Thanks>} />
-        <Route exact path="/user-agreement" element={<UserAgreement></UserAgreement>} />
-        <Route exact path="/privacy-policy" element={<PrivacyPolicy></PrivacyPolicy>} />
-      </Routes>
-    </HashRouter>
+    <>
+      <HashRouter>
+        {/* <Thanks/> */}
+        <Routes>
+          <Route exact path="/" element={<Home></Home>} />
+          <Route exact path="/thanks" element={<Thanks></Thanks>} />
+          <Route exact path="/user-agreement" element={<UserAgreement></UserAgreement>} />
+          <Route exact path="/privacy-policy" element={<PrivacyPolicy></PrivacyPolicy>} />
+        </Routes>
+      </HashRouter>
+      <AgentationToolbar />
+    </>
   </I18nProvider>
 );
 
